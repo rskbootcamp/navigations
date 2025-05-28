@@ -17,19 +17,19 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "PuntajesTableViewCell", bundle: nil), forCellReuseIdentifier: "puntajeID")
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.dataSource = self //tomar metodos de UITableViewDataSource configurados
+        tableView.delegate = self //tomar metodos de UITableViewDelegate configurados
 
     }
 
 }
 
-extension NewViewController {
+extension NewViewController { //el extension sirve para agregar más métodos a nuestras clases
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
             return 3
         } else {
-            return puntos.count
+            return puntos.count //cantidad de elementos de la lista
         }
 //        return puntos.count
     }
@@ -61,6 +61,8 @@ extension NewViewController {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //le configuramos la vista que queremos reutilizar
+        
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 //        let cell = UITableViewCell()
 //        let label = UILabel()
@@ -69,8 +71,8 @@ extension NewViewController {
 //        cell.textLabel?.text = puntos[indexPath.row].0
 //        cell.detailTextLabel?.text = puntos[indexPath.row].1
         let cell = tableView.dequeueReusableCell(withIdentifier: "puntajeID") as! PuntajesTableViewCell
-        cell.puntajeLabel.text = "\(puntos[indexPath.row].1) puntos"
-        if indexPath.section == 1 {
+        cell.puntajeLabel.text = "\(puntos[indexPath.row].1) puntos" //setear el texto de la celda segun la lista
+        if indexPath.section == 1 { //verificar el numero de seccion para configurar las celdas
             cell.puntajeLabel.textColor = .red
         }
         return cell
